@@ -1,7 +1,6 @@
 <h5>ADD</h5>
 <ul>
-    <li>NPM IMDB API</li>
-    <li>QR SCANER</li>
+    <li>CORS</li>
 </ul>
 
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
