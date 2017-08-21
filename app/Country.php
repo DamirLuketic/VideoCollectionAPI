@@ -4,14 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MediaType extends Model
+class Country extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $table = 'countries';
+    public $timestamps = false;
     protected $fillable = [
+        'code',
         'name'
     ];
 
@@ -22,9 +20,9 @@ class MediaType extends Model
     public static function toOptions($prepend=null)
     {
         $options = [];
-        $items = static::orderBy('id', ASC)->get(['id','name']);
+        $items = static::orderBy('name', ASC)->get(['code','name']);
         foreach ($items as $item) {
-            $options[$item['id']] = $item['name'];
+            $options[$item['code']] = $item['name'];
         }
         return $options;
     }
