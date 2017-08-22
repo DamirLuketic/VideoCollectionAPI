@@ -16,6 +16,18 @@ class Role extends Model
     ];
 
     /**
+     * Relations
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    /**
+     * Methods
+     */
+
+    /**
      * @param null $prepend
      * @return array
      */

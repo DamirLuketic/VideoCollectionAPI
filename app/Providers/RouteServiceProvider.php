@@ -2,6 +2,13 @@
 
 namespace App\Providers;
 
+use App\Condition;
+use App\Country;
+use App\Image;
+use App\MediaType;
+use App\Role;
+use App\User;
+use App\Video;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -26,6 +33,17 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        /**
+         * Model class definition
+         */
+        Route::model('role', Role::class);
+        Route::model('user', User::class);
+        Route::model('condition', Condition::class);
+        Route::model('country', Country::class);
+        Route::model('image', Image::class);
+        Route::model('media_type', MediaType::class);
+        Route::model('video', Video::class);
     }
 
     /**

@@ -14,6 +14,22 @@ class Country extends Model
     ];
 
     /**
+     * Relations
+     */
+    public function users()
+    {
+        $this->hasMany(User::class);
+    }
+    public function videos()
+    {
+        $this->belongsToMany(Video::class);
+    }
+
+    /**
+     * Methods
+     */
+
+    /**
      * @param null $prepend
      * @return array
      */

@@ -16,6 +16,18 @@ class MediaType extends Model
     ];
 
     /**
+     * Relations
+     */
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+    }
+
+    /**
+     * Methods
+     */
+
+    /**
      * @param null $prepend
      * @return array
      */

@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Http\Request;
 
 /*
@@ -15,4 +16,9 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('test/{user}', function (User $user){
+//    $user = User::findOrFail(1);
+    return $user;
 });
