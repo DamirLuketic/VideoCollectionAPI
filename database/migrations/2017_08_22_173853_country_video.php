@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CountryUser extends Migration
+class CountryVideo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CountryUser extends Migration
      */
     public function up()
     {
-        Schema::create('country_user', function ($table) {
+        Schema::create('country_video', function ($table) {
             $table->increments('id');
             $table->string('country_id');
             $table->string('video_id');
@@ -27,6 +27,6 @@ class CountryUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('country_user');
+        Schema::dropIfExists('country_video');
     }
 }

@@ -19,6 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('test/{user}', function (User $user){
-//    $user = User::findOrFail(1);
     return $user;
 });
