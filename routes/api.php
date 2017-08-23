@@ -18,6 +18,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('test/{user}', function (User $user){
-    return $user;
+Route::resource('condition', 'ConditionController');
+Route::resource('country', 'CountryController');
+Route::resource('image', 'ImageController');
+Route::resource('media_type', 'MediaTypeController');
+Route::resource('user', 'UserController');
+Route::resource('video', 'VideoController');
+
+
+/**
+ * For test
+ */
+Route::get('test', function (){
+    return view('test');
 });
