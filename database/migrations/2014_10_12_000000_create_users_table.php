@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_active')->default(1);
             $table->string('confirmation_key')->nullable();
             $table->boolean('is_confirmed')->default(0);
+            $table->boolean('is_visible')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });
