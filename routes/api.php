@@ -25,10 +25,11 @@ Route::resource('media_type', 'MediaTypeController');
 Route::resource('user', 'UserController');
 Route::resource('video', 'VideoController');
 
+Route::post('user/login', 'UserController@login')->name('user.login');
 
 /**
  * For test
  */
-Route::get('test', function (){
-    return view('test');
-});
+Route::post('test', function (Request $request){
+    return $request->all();
+})->name('test');

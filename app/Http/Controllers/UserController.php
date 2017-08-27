@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -80,5 +81,31 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function login(Request $request)
+    {
+        $email_name = $request->all()['emailName'];
+        $password = $request->all()['password'];
+
+        if($user = User::where('email', 'like', $email_name)->orWhere('name', 'like', $email_name)->first())
+        {
+            if (password_verify($password, $user->password))
+            {
+                $user_data['id'] = $user->id;
+                $user_data['name'] = $user->name;
+                $user_data['email'] = $user->email;
+                $user_data['is_confirmed'] = $user->is_confirmed;
+                $user_data['country_id'] = $user->country_id;
+                $user_data['is_visible'] = $user->is_visible;
+                return $user_data;
+            } else
+            {
+                return [1];
+            }
+        }else
+        {
+            return [0];
+        }
     }
 }
