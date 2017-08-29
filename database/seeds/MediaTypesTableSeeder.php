@@ -1,5 +1,6 @@
 <?php
 
+use App\MediaType;
 use Illuminate\Database\Seeder;
 
 class MediaTypesTableSeeder extends Seeder
@@ -19,6 +20,9 @@ class MediaTypesTableSeeder extends Seeder
                 ['name' => 'Blu-ray disc'],
             ];
 
-        DB::table('media_types')->insert($media_types);
+        foreach ($media_types as $media_type)
+        {
+            MediaType::create($media_type);
+        }
     }
 }

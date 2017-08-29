@@ -1,7 +1,7 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -26,13 +26,10 @@ class UsersTableSeeder extends Seeder
                 ]
             ];
 
-        $users_hash =  [];
         foreach ($users as $user)
         {
-            $user['password'] = Hash::make($user['password']);
-            $users_hash[] = $user;
+            User::create($user);
         }
 
-        DB::table('users')->insert($users_hash);
     }
 }

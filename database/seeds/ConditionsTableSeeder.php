@@ -1,5 +1,6 @@
 <?php
 
+use App\Condition;
 use Illuminate\Database\Seeder;
 
 class ConditionsTableSeeder extends Seeder
@@ -22,6 +23,9 @@ class ConditionsTableSeeder extends Seeder
                 ['name' => 'Acceptable']
             ];
 
-        DB::table('conditions')->insert($conditions);
+        foreach ($conditions as $condition)
+        {
+            Condition::create($condition);
+        }
     }
 }
