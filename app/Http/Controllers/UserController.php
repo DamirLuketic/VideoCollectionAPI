@@ -35,7 +35,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::whereEmail($request->email)->first();
+
+        if(!isset($user))
+        {
+            User::create($request->all());
+            return [1];
+            // User set
+        }else{
+            return [0];
+            // E-mail in use
+        }
     }
 
     /**
