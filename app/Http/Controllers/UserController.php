@@ -35,7 +35,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::whereEmail($request->email)->first();
+        $user = User::whereEmail($request->email)->orWhere('name', 'like', $request->name)->first();
 
         if(!isset($user))
         {
@@ -44,7 +44,7 @@ class UserController extends Controller
             // User set
         }else{
             return [0];
-            // E-mail in use
+            // E-mail or username in use
         }
     }
 
