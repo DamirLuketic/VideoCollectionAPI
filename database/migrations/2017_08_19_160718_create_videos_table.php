@@ -43,6 +43,7 @@ class CreateVideosTable extends Migration
             $table->boolean('for_change')->nullable();
             $table->string('buying_price')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

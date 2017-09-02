@@ -19,6 +19,7 @@ class CreateImagesTable extends Migration
             $table->boolean('is_cover')->default(0);
             $table->string('path')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
