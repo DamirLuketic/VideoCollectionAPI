@@ -95,10 +95,10 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $email_name = $request->all()['emailName'];
+        $name_email = $request->all()['nameEmail'];
         $password = $request->all()['password'];
 
-        if($user = User::where('email', 'like', $email_name)->orWhere('name', 'like', $email_name)->first())
+        if($user = User::where('email', 'like', $name_email)->orWhere('name', 'like', $name_email)->first())
         {
             if (password_verify($password, $user->password))
             {
