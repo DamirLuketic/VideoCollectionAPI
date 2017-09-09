@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -35,16 +36,34 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::whereEmail($request->email)->orWhere('name', 'like', $request->name)->first();
+        $user_email = User::whereEmail($request->email)->first();
+        $user_name = User::whereName($request->name)->first();
 
-        if(!isset($user))
+        if($user_name)
         {
-            User::create($request->all());
+            return ['register_error' => 'Username in use'];
+        }elseif($user_email)
+        {
+            return ['register_error' => 'E-mail in use'];
+        }else{
+            $input = $request->all();
+            $confirmation_key = random_int(0, 10000);
+            $input['confirmation_key'] = $confirmation_key;
+
+            $send_data = [];
+            $send_data['name'] = $request->name;
+            $send_data['email'] = $request->email;
+            $send_data['link'] = $request->url() . '/email_confirmation/' . $request->email . '/' .  $confirmation_key;
+
+            Mail::send('emails.verify', ['send_data' => $send_data], function($message) use ($send_data)
+            {
+                $message->from('luketic.damir@gmail.com', 'Video collection admin');
+                $message->to($send_data['email'], $send_data['name'])->subject('Video collection - e-mail confirmation');
+            });
+
+            User::create($input);
             return [1];
             // User set
-        }else{
-            return [0];
-            // E-mail or username in use
         }
     }
 
@@ -102,22 +121,43 @@ class UserController extends Controller
         {
             if (password_verify($password, $user->password))
             {
+                $user_data = [];
                 $user_data['id'] = $user->id;
                 $user_data['name'] = $user->name;
                 $user_data['email'] = $user->email;
                 $user_data['is_confirmed'] = $user->is_confirmed;
-                $user_data['country'] = $user->country->name;
+                $user_data['country'] = isset($user->country->name) ? $user->country->name : null;
                 $user_data['is_visible'] = $user->is_visible;
                 return $user_data;
             } else
             {
                 return [1];
-                // Error "False password"
+//                 Error "False password"
             }
         }else
         {
             return [0];
-            // Error "False validation"
+//             Error "False validation"
+        }
+    }
+
+    public function email_confirmation(Request $request, $email, $key){
+        $user  = User::whereEmail($email)->whereConfirmationKey($key)->first();
+        if($user)
+        {
+            $user->update(['is_confirmed' => 1]);
+
+            $set_user = [];
+            $set_user['id'] = $user->id;
+            $set_user['name'] = $user->name;
+            $set_user['email'] = $user->email;
+            $set_user['is_confirmed'] = $user->is_confirmed;
+            $set_user['country'] = $user->country;
+            $set_user['is_visible'] = $user->is_visible;
+
+            return redirect('http://localhost:4200/email_confirmed/1');
+        }else{
+            return redirect('http://localhost:4200/email_confirmed/0');
         }
     }
 }
