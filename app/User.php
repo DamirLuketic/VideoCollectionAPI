@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_active', 'confirmation_key', 'is_confirmed', 'country_id', 'is_visible'
+        'name', 'email', 'password', 'is_active', 'confirmation_key', 'is_confirmed', 'country_code', 'is_visible'
     ];
 
     /**
@@ -46,7 +46,7 @@ class User extends Authenticatable
     }
     public function country()
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class, 'country_code', 'code');
     }
     public function videos()
     {

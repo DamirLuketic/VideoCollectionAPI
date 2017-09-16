@@ -126,18 +126,16 @@ class UserController extends Controller
                 $user_data['name'] = $user->name;
                 $user_data['email'] = $user->email;
                 $user_data['is_confirmed'] = $user->is_confirmed;
-                $user_data['country_id'] = isset($user->country->id) ? $user->country->id : null;
+                $user_data['country_code'] = $user->country_code;
                 $user_data['is_visible'] = $user->is_visible;
                 return $user_data;
             } else
             {
                 return [1];
-//                 Error "False password"
             }
         }else
         {
             return [0];
-//             Error "False validation"
         }
     }
 

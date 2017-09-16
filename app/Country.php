@@ -27,11 +27,11 @@ class Country extends Model
      */
     public function users()
     {
-        $this->hasMany(User::class);
+        $this->hasMany(User::class, 'code', 'country_code');
     }
     public function videos()
     {
-        $this->belongsToMany(Video::class);
+        $this->belongsToMany(Video::class, 'country_video', 'code', 'country_code');
     }
 
     /**
@@ -45,7 +45,7 @@ class Country extends Model
     public static function toOptions($prepend=null)
     {
         $options = [];
-        $items = static::orderBy('name', ASC)->get(['code','name']);
+        $items = static::orderBy('name', 'ASC')->get(['code','name']);
         foreach ($items as $item) {
             $options[$item['code']] = $item['name'];
         }
