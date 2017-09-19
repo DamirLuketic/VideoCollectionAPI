@@ -41,7 +41,6 @@ class CreateVideosTable extends Migration
             $table->longText('note')->nullable();
             $table->longText('private_note')->nullable();
             $table->boolean('for_change')->nullable();
-            $table->string('buying_price')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

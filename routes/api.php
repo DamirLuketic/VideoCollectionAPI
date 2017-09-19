@@ -32,5 +32,5 @@ Route::get('user/email_confirmation/{email}/{key}', 'UserController@email_confir
  * For test
  */
 Route::get('test', function (Request $request){
-    return User::find(1)->country->id;
+    return User::find(1)->videos[1]->countries;
 })->name('test');

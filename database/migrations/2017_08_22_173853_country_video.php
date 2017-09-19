@@ -15,8 +15,8 @@ class CountryVideo extends Migration
     {
         Schema::create('country_video', function ($table) {
             $table->increments('id');
-            $table->string('country_code');
             $table->integer('video_id');
+            $table->integer('country_id');
         });
     }
 

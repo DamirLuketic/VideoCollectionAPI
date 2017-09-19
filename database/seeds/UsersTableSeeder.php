@@ -30,6 +30,5 @@ class UsersTableSeeder extends Seeder
         {
             User::create($user);
         }
-
     }
 }
