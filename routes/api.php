@@ -27,6 +27,7 @@ Route::resource('video', 'VideoController');
 
 Route::post('user/login', 'UserController@login')->name('user.login');
 Route::get('user/email_confirmation/{email}/{key}', 'UserController@email_confirmation')->name('email_confirmation');
+Route::post('video/personal', 'VideoController@video_personal')->name('video.personal');
 
 /**
  * For test

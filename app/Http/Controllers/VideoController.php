@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Video;
 use Illuminate\Http\Request;
 
 class VideoController extends Controller
@@ -80,5 +81,14 @@ class VideoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Get current user collection
+     */
+    public function video_personal(Request $request){
+        $user_id = (int)($request->all()[0]);
+        $videos = Video::whereUserId($user_id)->get();
+        return $videos;
     }
 }
