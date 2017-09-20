@@ -44,7 +44,7 @@ class Role extends Model
     public static function toOptions($prepend=null)
     {
         $options = [];
-        $items = static::orderBy('id', ASC)->get(['id','name']);
+        $items = static::orderBy('id', 'ASC')->get(['id','name']);
         foreach ($items as $item) {
             $options[$item['id']] = $item['name'];
         }

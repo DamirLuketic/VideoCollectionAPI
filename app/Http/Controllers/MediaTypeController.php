@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MediaType;
 use Illuminate\Http\Request;
 
 class MediaTypeController extends Controller
@@ -13,7 +14,7 @@ class MediaTypeController extends Controller
      */
     public function index()
     {
-        //
+        return MediaType::toOptions();
     }
 
     /**

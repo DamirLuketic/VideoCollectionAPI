@@ -62,7 +62,7 @@ class Video extends Model
     public static function toOptions($prepend=null)
     {
         $options = [];
-        $items = static::orderBy('id', ASC)->get(['id','title']);
+        $items = static::orderBy('id', 'ASC')->get(['id','title']);
         foreach ($items as $item) {
             $options[$item['id']] = $item['title'];
         }

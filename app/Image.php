@@ -44,7 +44,7 @@ class Image extends Model
     public static function toOptions($prepend=null)
     {
         $options = [];
-        $items = static::orderBy('id', ASC)->get(['id','path']);
+        $items = static::orderBy('id', 'ASC')->get(['id','path']);
         foreach ($items as $item) {
             $options[$item['id']] = $item['path'];
         }
