@@ -40,7 +40,7 @@ class CreateVideosTable extends Migration
             $table->string('asin')->nullable();
             $table->longText('note')->nullable();
             $table->longText('private_note')->nullable();
-            $table->boolean('for_change')->nullable();
+            $table->boolean('for_change')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

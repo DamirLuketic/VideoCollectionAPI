@@ -35,7 +35,16 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $video = $request->all();
+        foreach ($video as $key => $value)
+        {
+            if($value === null)
+            {
+                unset($video[$key]);
+            }
+        }
+        Video::create($video);
+        return [true];
     }
 
     /**
