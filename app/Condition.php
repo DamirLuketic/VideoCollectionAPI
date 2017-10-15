@@ -50,4 +50,19 @@ class Condition extends Model
         }
         return $options;
     }
+
+    /**
+     * @return array
+     */
+    public static function forArray()
+    {
+        $options = [];
+        $items = static::orderBy('name', 'ASC')->get();
+        foreach ($items as $key => $item)
+        {
+            $options[$key]['id'] = $item->id;
+            $options[$key]['name'] = $item->name;
+        }
+        return $options;
+    }
 }

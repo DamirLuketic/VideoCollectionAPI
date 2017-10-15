@@ -14,7 +14,7 @@ class MediaTypeController extends Controller
      */
     public function index()
     {
-        return MediaType::toOptions();
+        return MediaType::forArray();
     }
 
     /**
