@@ -57,7 +57,7 @@ class Condition extends Model
     public static function forArray()
     {
         $options = [];
-        $items = static::orderBy('name', 'ASC')->get();
+        $items = static::orderBy('name', 'ASC')->get(['id','name']);
         foreach ($items as $key => $item)
         {
             $options[$key]['id'] = $item->id;
