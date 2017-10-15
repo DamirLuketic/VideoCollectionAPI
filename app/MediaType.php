@@ -57,11 +57,11 @@ class MediaType extends Model
     public static function forArray()
     {
         $options = [];
-        $items = static::orderBy('name', 'ASC')->get();
+        $items = static::all();
         foreach ($items as $key => $item)
         {
-            $options[$key]['id'] = $item->id;
-            $options[$key]['name'] = $item->name;
+            $options[$item->id - 1]['id'] = $item->id;
+            $options[$item->id - 1]['name'] = $item->name;
         }
         return $options;
     }
