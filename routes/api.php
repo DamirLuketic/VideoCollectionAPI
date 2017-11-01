@@ -24,6 +24,7 @@ Route::resource('image', 'ImageController');
 Route::resource('media_type', 'MediaTypeController');
 Route::resource('user', 'UserController');
 Route::resource('video', 'VideoController');
+Route::resource('genre', 'GenreController');
 
 Route::post('user/login', 'UserController@login')->name('user.login');
 Route::get('user/email_confirmation/{email}/{key}', 'UserController@email_confirmation')->name('email_confirmation');

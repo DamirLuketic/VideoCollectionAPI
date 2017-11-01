@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Condition;
 use App\Country;
+use App\Genre;
 use App\Image;
 use App\MediaType;
 use App\Role;
@@ -44,6 +45,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('image', Image::class);
         Route::model('media_type', MediaType::class);
         Route::model('video', Video::class);
+        Route::model('genre', Genre::class);
     }
 
     /**
