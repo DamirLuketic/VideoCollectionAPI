@@ -14,7 +14,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        return Genre::forArray();
+        return Genre::toOptions();
     }
 
     /**
