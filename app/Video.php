@@ -17,7 +17,8 @@ class Video extends Model
     protected $fillable = [
         'user_id', 'media_type_id', 'condition_id', 'title', 'year', 'genres', 'country_code', 'directors', 'actors',
         'format', 'languages', 'subtitles', 'region', 'aspect_ratio', 'fsk', 'studio', 'release_date',
-        'theatrical_release_date','run_time', 'ean', 'upc', 'isbn', 'asin', 'note', 'private_note', 'for_change'
+        'theatrical_release_date','run_time', 'ean', 'upc', 'isbn', 'asin', 'note', 'private_note', 'for_change',
+        'media_languages'
     ];
 
     /**
