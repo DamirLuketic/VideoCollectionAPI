@@ -101,8 +101,6 @@ class UserController extends Controller
     public function update(Request $request,User $user)
     {
         $data = $request->all();
-        $country = Country::findOrFail($data['country_code']);
-        $data['country_code'] = $country->code;
         $user->update($data);
         return [1];
     }
@@ -132,7 +130,7 @@ class UserController extends Controller
                 $user_data['name'] = $user->name;
                 $user_data['email'] = $user->email;
                 $user_data['is_confirmed'] = $user->is_confirmed;
-                $user_data['country_code'] = $user->country_code;
+                $user_data['country_id'] = $user->country_id;
                 $user_data['is_visible'] = $user->is_visible;
                 return $user_data;
             } else

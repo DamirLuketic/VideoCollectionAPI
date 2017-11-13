@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             [
                 [
                     'role_id'       => 1,
-                    'country_code'  => 'HR',
+                    'country_id'    => '53',
                     'name'          => 'Damir',
                     'email'         => 'luketic.damir@gmail.com',
                     'password'      => 'pass11',

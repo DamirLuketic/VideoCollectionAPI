@@ -20,8 +20,6 @@ class CreateVideosTable extends Migration
             $table->integer('condition_id')->nullable();
             $table->string('title');
             $table->string('year')->nullable();
-            $table->string('genres')->nullable();
-            $table->string('country_code')->nullable();
             $table->string('directors')->nullable();
             $table->string('actors')->nullable();
             $table->string('format')->nullable();

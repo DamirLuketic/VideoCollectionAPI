@@ -27,11 +27,11 @@ class Country extends Model
      */
     public function users()
     {
-        $this->hasMany(User::class, 'code', 'country_code');
+        $this->hasMany(User::class, 'id', 'country_id');
     }
     public function videos()
     {
-        $this->belongsToMany(Video::class, 'country_video', 'code', 'country_code');
+        $this->belongsToMany(Video::class, 'country_video', 'id', 'country_id');
     }
 
     /**

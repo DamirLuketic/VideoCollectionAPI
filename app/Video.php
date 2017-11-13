@@ -15,7 +15,7 @@ class Video extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'media_type_id', 'condition_id', 'title', 'year', 'genres', 'country_code', 'directors', 'actors',
+        'user_id', 'media_type_id', 'condition_id', 'title', 'year', 'directors', 'actors',
         'format', 'languages', 'subtitles', 'region', 'aspect_ratio', 'fsk', 'studio', 'release_date',
         'theatrical_release_date','run_time', 'ean', 'upc', 'isbn', 'asin', 'note', 'private_note', 'for_change',
         'media_languages'
