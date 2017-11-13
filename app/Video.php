@@ -53,7 +53,7 @@ class Video extends Model
     }
     public function genres()
     {
-        return $this->belongsToMany(MediaType::class);
+        return $this->belongsToMany(Genre::class);
     }
 
     /**

@@ -45,9 +45,9 @@ class Country extends Model
     public static function toOptions($prepend=null)
     {
         $options = [];
-        $items = static::orderBy('name', 'ASC')->get(['code','name']);
+        $items = static::orderBy('name', 'ASC')->get(['id','name']);
         foreach ($items as $item) {
-            $options[$item['code']] = $item['name'];
+            $options[$item['id']] = $item['name'];
         }
         return $options;
     }

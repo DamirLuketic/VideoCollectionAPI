@@ -36,6 +36,9 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $video = $request->all();
+        $countries = null;
+        $genres = null;
+
         foreach ($video as $key => $value)
         {
             if($value === null)
@@ -43,7 +46,37 @@ class VideoController extends Controller
                 unset($video[$key]);
             }
         }
-        Video::create($video);
+
+        if (isset($video['country_code']))
+        {
+            $countries = $video['country_code'];
+            unset($video['country_code']);
+        }
+
+        if (isset($video['genres']))
+        {
+            $genres = $video['genres'];
+            unset($video['genres']);
+        }
+
+        $current_video = Video::create($video);
+
+        if ($genres != null)
+        {
+            foreach ($genres as $genre_id)
+            {
+                $current_video->genres()->attach((int)$genre_id);
+            }
+        }
+
+        if ($countries != null)
+        {
+            foreach ($countries as $country_id)
+            {
+                $current_video->countries()->attach((int)$country_id);
+            }
+        }
+
         return [true];
     }
 

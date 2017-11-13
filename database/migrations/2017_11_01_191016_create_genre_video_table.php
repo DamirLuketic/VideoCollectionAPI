@@ -13,7 +13,11 @@ class CreateGenreVideoTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('genre_video', function ($table) {
+            $table->increments('id');
+            $table->integer('video_id');
+            $table->integer('genre_id');
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class CreateGenreVideoTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('genre_video');
     }
 }

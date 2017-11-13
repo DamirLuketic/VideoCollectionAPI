@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -99,7 +100,10 @@ class UserController extends Controller
      */
     public function update(Request $request,User $user)
     {
-        $user->update($request->all());
+        $data = $request->all();
+        $country = Country::findOrFail($data['country_code']);
+        $data['country_code'] = $country->code;
+        $user->update($data);
         return [1];
     }
 
