@@ -89,7 +89,8 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Video::destroy($id['id']);
+        return ['1'];
     }
 
     /**
