@@ -132,6 +132,16 @@ class VideoController extends Controller
     public function video_personal(Request $request){
         $user_id = (int)($request->all()[0]);
         $videos = Video::whereUserId($user_id)->get();
+
+        foreach ($videos as $video)
+        {
+            $genres = $video->genres;
+            foreach ($genres as $genre)
+            {
+                $video['genres'] = $genre;
+            }
+        }
+
         return $videos;
     }
 }

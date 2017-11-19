@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use App\Video;
 use Illuminate\Http\Request;
 
 /*
@@ -34,5 +35,21 @@ Route::post('video/personal', 'VideoController@video_personal')->name('video.per
  * For test
  */
 Route::get('test', function (Request $request){
-    return User::find(1)->videos[1]->countries;
+    $user = User::find(1);
+    $videos = $user->videos;
+    foreach ($videos as $video) {
+        $genres = $video->genres;
+        $video['genres'] = $genres;
+
+            if (isset($genres[0]))
+            {
+                unset ($video['genres']);
+                foreach ($genres as $genre)
+                {
+                    $video['genres'] .= $genre->pivot->genre_id;
+                }
+            }
+
+    }
+    return $videos;
 })->name('test');
