@@ -140,6 +140,11 @@ class VideoController extends Controller
             {
                 $video['genres'] = $genre;
             }
+            $countries = $video->countries;
+            foreach ($countries as $country)
+            {
+                $video['countries'] = $countries;
+            }
         }
 
         return $videos;
