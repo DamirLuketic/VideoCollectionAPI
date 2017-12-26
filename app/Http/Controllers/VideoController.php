@@ -149,4 +149,10 @@ class VideoController extends Controller
 
         return $videos;
     }
+
+    public function video_catch($media_id)
+    {
+        $video = Video::findOrFail($media_id);
+        return $video;
+    }
 }

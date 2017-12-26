@@ -30,7 +30,7 @@ Route::resource('genre', 'GenreController');
 Route::post('user/login', 'UserController@login')->name('user.login');
 Route::get('user/email_confirmation/{email}/{key}', 'UserController@email_confirmation')->name('email_confirmation');
 Route::post('video/personal', 'VideoController@video_personal')->name('video.personal');
-
+Route::get('video/catch/{mediaId}', 'VideoController@video_catch')->name('video.catch');
 /**
  * For test
  */
