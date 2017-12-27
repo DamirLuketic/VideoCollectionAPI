@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('video/collection', 'VideoController@video_collection')->name('video.collection');
 
 Route::resource('condition', 'ConditionController');
 Route::resource('country', 'CountryController');
@@ -31,25 +32,26 @@ Route::post('user/login', 'UserController@login')->name('user.login');
 Route::get('user/email_confirmation/{email}/{key}', 'UserController@email_confirmation')->name('email_confirmation');
 Route::post('video/personal', 'VideoController@video_personal')->name('video.personal');
 Route::get('video/catch/{mediaId}', 'VideoController@video_catch')->name('video.catch');
+
 /**
  * For test
  */
-Route::get('test', function (Request $request){
-    $user = User::find(1);
-    $videos = $user->videos;
-    foreach ($videos as $video) {
-        $genres = $video->genres;
-        $video['genres'] = $genres;
-
-            if (isset($genres[0]))
-            {
-                unset ($video['genres']);
-                foreach ($genres as $genre)
-                {
-                    $video['genres'] .= $genre->pivot->genre_id;
-                }
-            }
-
-    }
-    return $videos;
-})->name('test');
+//Route::get('test', function (Request $request){
+//    $user = User::find(1);
+//    $videos = $user->videos;
+//    foreach ($videos as $video) {
+//        $genres = $video->genres;
+//        $video['genres'] = $genres;
+//
+//            if (isset($genres[0]))
+//            {
+//                unset ($video['genres']);
+//                foreach ($genres as $genre)
+//                {
+//                    $video['genres'] .= $genre->pivot->genre_id;
+//                }
+//            }
+//
+//    }
+//    return $videos;
+//})->name('test');

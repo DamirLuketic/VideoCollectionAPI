@@ -112,35 +112,41 @@ class VideoController extends Controller
     public function update(Request $request, Video $video)
     {
         $req = $request->all();
-        $countries = null;
-        $genres = null;
-
-        foreach ($req as $key => $value)
+        if ($video->user_id == $req['user_id'])
         {
-            if($value === null)
+            $countries = null;
+            $genres = null;
+
+            foreach ($req as $key => $value)
             {
-                unset($req[$key]);
+                if($value === null)
+                {
+                    unset($req[$key]);
+                }
             }
+
+            if (isset($req['countries']))
+            {
+                $countries = $req['countries'];
+                $video->countries()->sync($countries);
+                unset($req['countries']);
+            }
+
+            if (isset($req['genres']))
+            {
+                $genres = $req['genres'];
+                $video->genres()->sync($genres);
+                unset($req['genres']);
+            }
+
+            $video->update($req);
+            $video->save();
+
+            return [true];
+        }else {
+            return [false];
         }
 
-        if (isset($req['countries']))
-        {
-            $countries = $req['countries'];
-            $video->countries()->sync($countries);
-            unset($req['countries']);
-        }
-
-        if (isset($req['genres']))
-        {
-            $genres = $req['genres'];
-            $video->genres()->sync($genres);
-            unset($req['genres']);
-        }
-
-        $video->update($req);
-        $video->save();
-
-        return [$req];
     }
 
     /**
@@ -193,5 +199,27 @@ class VideoController extends Controller
             $video['countries'][] = $country->id;
         }
         return $video;
+    }
+
+    public function video_collection()
+    {
+        $videos = Video::where('for_change', '=', 1)->orderBy('title')->get();
+
+        foreach ($videos as $video)
+        {
+            $genres = $video->genres;
+            foreach ($genres as $genre)
+            {
+                $video['genres'] = $genre;
+            }
+            $countries = $video->countries;
+            foreach ($countries as $country)
+            {
+                $video['countries'] = $country;
+            }
+            $video['user_email'] = $video->user->email;
+        }
+
+        return $videos;
     }
 }
