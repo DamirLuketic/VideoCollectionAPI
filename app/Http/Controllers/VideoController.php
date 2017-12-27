@@ -47,10 +47,10 @@ class VideoController extends Controller
             }
         }
 
-        if (isset($video['country_code']))
+        if (isset($video['countries']))
         {
-            $countries = $video['country_code'];
-            unset($video['country_code']);
+            $countries = $video['countries'];
+            unset($video['countries']);
         }
 
         if (isset($video['genres']))
@@ -143,7 +143,7 @@ class VideoController extends Controller
             $countries = $video->countries;
             foreach ($countries as $country)
             {
-                $video['countries'] = $countries;
+                $video['countries'] = $country;
             }
         }
 
@@ -153,6 +153,16 @@ class VideoController extends Controller
     public function video_catch($media_id)
     {
         $video = Video::findOrFail($media_id);
+        $genres = $video->genres;
+        foreach ($genres as $genre)
+        {
+            $video['genres'][] = $genre->id;
+        }
+        $countries = $video->countries;
+        foreach ($countries as $country)
+        {
+            $video['countries'][] = $country->id;
+        }
         return $video;
     }
 }
