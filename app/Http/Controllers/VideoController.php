@@ -109,9 +109,38 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Video $video)
     {
-        //
+        $req = $request->all();
+        $countries = null;
+        $genres = null;
+
+        foreach ($req as $key => $value)
+        {
+            if($value === null)
+            {
+                unset($req[$key]);
+            }
+        }
+
+        if (isset($req['countries']))
+        {
+            $countries = $req['countries'];
+            $video->countries()->sync($countries);
+            unset($req['countries']);
+        }
+
+        if (isset($req['genres']))
+        {
+            $genres = $req['genres'];
+            $video->genres()->sync($genres);
+            unset($req['genres']);
+        }
+
+        $video->update($req);
+        $video->save();
+
+        return [$req];
     }
 
     /**
@@ -131,7 +160,7 @@ class VideoController extends Controller
      */
     public function video_personal(Request $request){
         $user_id = (int)($request->all()[0]);
-        $videos = Video::whereUserId($user_id)->get();
+        $videos = Video::whereUserId($user_id)->orderBy('title')->get();
 
         foreach ($videos as $video)
         {
